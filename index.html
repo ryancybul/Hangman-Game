@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>The Simpsons Hangman</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="./assets/css/style.css" />
+    <script src="./assets/javascript/game.js"></script>
+</head>
+<body>
+    <h1>The Simpsons Hangman</h1>
+    <h2>Press any key to get started!</h2>
+    <h2>Wins:</h2>
+    <h2>Current Word: <span id="target-id"></span></h2>
+    <h2>Numbers of guesses:</h2>
+    <h2>Letters guessed:</h2>
+
+    <script>
+    document.onkeyup = function(event) {
+      // Determines which key was pressed.
+
+    //global variabls
+    //Array of characters to guess.
+    var words = ["Marge", "Homer", "Bart", "Lisa", "Maggie", "Barney"];
+    let word;
+    let wins = 0;
+    let loss = 0;
+    let wordLength = [];
+    let guessIndex = [];
+    let dashGuess= [];
+    let userKey = event.key;
+
+
+
+    //This function will pick our word. 
+    var getRandomWord = function() {
+        return words[Math.floor(Math.random() * words.length)];
+    }
+    //Assigns random word to the variable. 
+    var word = getRandomWord();
+    console.log(word);
+
+    //Pushes word-length to the DOM as understcores 
+    for (var i=0; i < word.length; i++) {
+        wordLength.push("_");
+    }
+    document.getElementById("target-id").textContent = wordLength.join(" ");
+
+//Returns if key guessed is
+    if (word.indexOf(userKey) > -1) {
+        guessIndex = word.indexOf(userKey);
+        }
+//Returns if key guessed is
+        console.log(guessIndex);
+        dashGuess[guessIndex] = userKey;
+        dashGuessStr = dashGuess.join(" ");
+        console.log(dashGuessStr);
+    }
+
+    // var word = APPLE
+    // var blankGuess = "_ _ _ _ _"
+    // if A in word
+    // let loc = word.indexof('a')
+    // blankGuess[0]=event.key
+    
+    </script>
+    
+    
+</body>
+</html>
