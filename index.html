@@ -12,50 +12,65 @@
     <h1>The Simpsons Hangman</h1>
     <h2>Press any key to get started!</h2>
     <h2>Wins:</h2>
+    <h2>Losses</h2>
     <h2>Current Word: <span id="target-id"></span></h2>
-    <h2>Numbers of guesses:</h2>
-    <h2>Letters guessed:</h2>
+    <h2>Numbers of guesses: <span id="numberOfGuesses"></span></h2>
+    <h2>Letters guessed: <span id="wrongLetter"></span></h2>
 
     <script>
-    document.onkeyup = function(event) {
-      // Determines which key was pressed.
+    document.onkeyup = function (event) {
 
-    //global variabls
-    //Array of characters to guess.
-    var words = ["Marge", "Homer", "Bart", "Lisa", "Maggie", "Barney"];
-    let word;
-    let wins = 0;
-    let loss = 0;
-    let wordLength = [];
-    let guessIndex = [];
-    let dashGuess= [];
-    let userKey = event.key;
+        //Global variables
+        //let words = ["Marge", "Homer", "Bart", "Lisa", "Maggie", "Barney"];
+        let words = ["Maggie"];
+        let wins = 0;
+        let loss = 0;
+        //stores the underscores
+        let wordLength = [];
+        //indexed input as letter
+        let dashGuess = [];
+        
+        let wrongLetter = []; 
+        let numberOfGuesses = 10;
 
-
-
-    //This function will pick our word. 
-    var getRandomWord = function() {
-        return words[Math.floor(Math.random() * words.length)];
-    }
-    //Assigns random word to the variable. 
-    var word = getRandomWord();
-    console.log(word);
-
-    //Pushes word-length to the DOM as understcores 
-    for (var i=0; i < word.length; i++) {
-        wordLength.push("_");
-    }
-    document.getElementById("target-id").textContent = wordLength.join(" ");
-
-//Returns if key guessed is
-    if (word.indexOf(userKey) > -1) {
-        guessIndex = word.indexOf(userKey);
+        //This function will pick our word. 
+        let getRandomWord = function() {
+            return words[Math.floor(Math.random() * words.length)];
         }
-//Returns if key guessed is
-        console.log(guessIndex);
-        dashGuess[guessIndex] = userKey;
+        //Assigns random word to the variable. 
+        let word = getRandomWord();
+        console.log(word);
+
+        //Pushes word-length to the DOM as understcores 
+        for (let i=0; i < word.length; i++) {
+            wordLength.push("_");
+        }
+        document.getElementById("target-id").textContent = wordLength.join(" ");
+
+
+
+        //Captures user key
+        let userKey = event.key;
+        
+        //Sets guessIndex to the userKey/word index. 
+        let guessIndex = word.indexOf(userKey);
+        console.log('guessIndex: ' + guessIndex);
+
+        //Takes user key and pushes it to dashGuessStr.  May not need this code.    
+        dashGuess.push(userKey);
         dashGuessStr = dashGuess.join(" ");
-        console.log(dashGuessStr);
+        console.log('dashGuessStr: ' + dashGuessStr);
+        
+
+        //Returns if key guessed is
+        if (guessIndex > -1) {
+            wordLength[guessIndex] = userKey;
+        }
+        //Converts to string.
+        wordLengthStr = wordLength.join(" ");
+        console.log('wordLengthStr: ' + wordLengthStr);
+        document.getElementById("target-id").textContent = wordLengthStr;    
+       
     }
 
     // var word = APPLE
