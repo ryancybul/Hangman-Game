@@ -6,115 +6,33 @@
     <title>The Simpsons Hangman</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="./assets/css/style.css" />
+    <link href="https://fonts.googleapis.com/css?family=Short+Stack" rel="stylesheet">
     <script src="./assets/javascript/game.js"></script>
 </head>
 <body>
-    <h1>The Simpsons Hangman</h1>
-    <h2>Press any letter to get started!</h2>
-    <h2>Wins: <span id="win"></span> </h2>
-    <h2>Losses: <span id="loss"></span> </h2>
-    <h2>Current Word: <span id="target-id"></span></h2>
-    <h2>Wrong guesses left: <span id="numberOfGuesses"></span></h2>
-    <h2>Letters guessed: <span id="dashWrongGuess"></span></h2>
+   
+    <div class="logo">
+        <img class="image" src="./assets/images/The_Simpsons_Logo.svg">
+    </div>
 
-    <script>
-        //Global variables
-        let words = ["maggie", "marge", "homer", "barney", "lisa", "bart", "apu", "smithers", "moe", "milhouse", "nelson", "ralph", "krusty"];
-        let wins = 0;
-        let loss = 0;
-        let numberOfGuesses = 6;
-        let wordCounter = 0;
-        //stores random word           
-        let randWord = '';
-        //stores the underscores
-        let wordLength = [];
-        //indexed input as letter
-        let dashWrongGuess = [];
-        //guessed letter array
-        let guessedLetters = [];
+    <div class="instructions">
+        <div class="rules">
+            <h1>Hangman</h1>
+            <h2>Guess the characters name.</h2>
+            <h2>Press any letter to get started!</h2>
+        </div>
+        <div class="score">
+            <h3>Wins: <span id="win"></span> </h3>
+            <h3>Losses: <span id="loss"></span> </h3>
+            <h3>Current Word: <span id="target-id"></span></h3>
+            <h3>Wrong guesses left: <span id="numberOfGuesses"></span></h3>
+            <h3>Letters guessed: <span id="dashWrongGuess"></span></h3>
+        </div>
+    </div>
 
-        //Functions
-        function gameStart() {
-            //resets the neccesary variables to 0
-            numberOfGuesses = 6;
-            wordCounter = 0;
-            wordLength = [];
-            dashWrongGuess = [];
-            //Holds all guessed letters.
-            guessedLetters = [];
+    <audio id="wooHoo" src="./assets/Sounds/Homer - Woohoo! (1).wav"></audio>
+    <audio id="doh" src="./assets/Sounds/Homer - D'oh! (1).wav"></audio>
 
-            //Assigns random word to the variable. 
-            randWord = words[Math.floor(Math.random() * words.length)];
-
-            //Pushes array word-length to the DOM as understcores 
-            for (let i = 0; i < randWord.length; i++) {
-                wordLength.push("_");
-            }
-            
-            //reset the neccesary variables in the html
-            document.getElementById("target-id").textContent = wordLength.join(" ");
-            document.getElementById("numberOfGuesses").textContent = numberOfGuesses;
-            document.getElementById("dashWrongGuess").textContent = dashWrongGuess;
-            document.getElementById("win").textContent = wins;
-            document.getElementById("loss").textContent = loss;
-        }
-
-            
-        function winLoseCheck() {
-            if (wordCounter === randWord.length) {
-                wins++;
-                document.getElementById('win').textContent = wins;
-                alert("You won! The characer is " + randWord.charAt(0).toUpperCase() + randWord.slice(1) + ".");
-                gameStart();
-            } 
-            else if (numberOfGuesses === 0) {
-                loss++;
-                document.getElementById('loss').textContent = loss;
-                alert("You lost! The character was " + randWord.charAt(0).toUpperCase() + randWord.slice(1) + ".");
-                gameStart();
-            }
-        }
-
-        function letterCheck(userKey) 
-        {
-            //If letter is in the random word look for the letter in the index of the 
-            if (randWord.indexOf(userKey) > -1) {
-                for (let i = 0; i < randWord.length; i++) {
-                    if(randWord[i] === userKey) {
-                        wordLength[i] = userKey;
-                        let wordLengthStr = wordLength.join(" ");
-                        document.getElementById("target-id").textContent = wordLengthStr;  
-                        wordCounter++;
-                    }
-                }
-
-            }
-            //What happens if guess is wrong 
-            else { 
-                dashWrongGuess.push(userKey);
-                dashWrongGuessStr = dashWrongGuess.join(" ");
-                numberOfGuesses--;
-                document.getElementById("dashWrongGuess").textContent = dashWrongGuessStr;
-                document.getElementById("numberOfGuesses").textContent = numberOfGuesses;
-            }
-            
-            winLoseCheck();
-        };
-
-        //Events  
-        document.onload = gameStart();
-
-        //Keypress event
-        document.onkeyup = function(event) {
-            let keyInput = event.key.toLowerCase();
-            
-            //If keyInput is a letter and has not been guessed already run letter check and push guessedLetter to array. 
-            if ( /^[a-z]$/.test(keyInput) == true && guessedLetters.indexOf(keyInput) == -1 ) {
-               letterCheck(keyInput);
-               guessedLetters.push(keyInput);
-            }
-        }
-    </script>    
     
 </body>
 </html>
