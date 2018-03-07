@@ -14,12 +14,12 @@
     <h2>Wins: <span id="win"></span> </h2>
     <h2>Losses: <span id="loss"></span> </h2>
     <h2>Current Word: <span id="target-id"></span></h2>
-    <h2>Guesses left: <span id="numberOfGuesses"></span></h2>
+    <h2>Wrong guesses left: <span id="numberOfGuesses"></span></h2>
     <h2>Letters guessed: <span id="dashWrongGuess"></span></h2>
 
     <script>
         //Global variables
-        let words = ["maggie", "marge", "homer", "barney", "lisa", "bart"];
+        let words = ["maggie", "marge", "homer", "barney", "lisa", "bart", "apu", "smithers", "moe", "milhouse", "nelson", "ralph", "krusty"];
         let wins = 0;
         let loss = 0;
         let numberOfGuesses = 6;
@@ -33,18 +33,18 @@
         //guessed letter array
         let guessedLetters = [];
 
-        //gameStart
+        //Functions
         function gameStart() {
             //resets the neccesary variables to 0
             numberOfGuesses = 6;
             wordCounter = 0;
             wordLength = [];
             dashWrongGuess = [];
+            //Holds all guessed letters.
             guessedLetters = [];
 
             //Assigns random word to the variable. 
             randWord = words[Math.floor(Math.random() * words.length)];
-            console.log(randWord);
 
             //Pushes array word-length to the DOM as understcores 
             for (let i = 0; i < randWord.length; i++) {
@@ -61,17 +61,16 @@
 
             
         function winLoseCheck() {
-            console.log('randWord.length: ' + randWord.length + ', wordCounter: ' + wordCounter + ', numberOfGuesses: ' + numberOfGuesses);
-
             if (wordCounter === randWord.length) {
                 wins++;
                 document.getElementById('win').textContent = wins;
-                alert("You won! The characer is " + randWord.toUpperCase());
+                alert("You won! The characer is " + randWord.charAt(0).toUpperCase() + randWord.slice(1) + ".");
                 gameStart();
-            } else if (numberOfGuesses === 0) {
-                loss++
+            } 
+            else if (numberOfGuesses === 0) {
+                loss++;
                 document.getElementById('loss').textContent = loss;
-                alert("You lost! The character was " + randWord.toUpperCase());
+                alert("You lost! The character was " + randWord.charAt(0).toUpperCase() + randWord.slice(1) + ".");
                 gameStart();
             }
         }
@@ -83,13 +82,15 @@
                 for (let i = 0; i < randWord.length; i++) {
                     if(randWord[i] === userKey) {
                         wordLength[i] = userKey;
-                        wordLengthStr = wordLength.join(" ");
+                        let wordLengthStr = wordLength.join(" ");
                         document.getElementById("target-id").textContent = wordLengthStr;  
                         wordCounter++;
-                        console.log(wordCounter);
                     }
                 }
-            } else { //What happens if guess is wrong
+
+            }
+            //What happens if guess is wrong 
+            else { 
                 dashWrongGuess.push(userKey);
                 dashWrongGuessStr = dashWrongGuess.join(" ");
                 numberOfGuesses--;
@@ -101,13 +102,13 @@
         };
 
         //Events  
-        gameStart();
+        document.onload = gameStart();
 
+        //Keypress event
         document.onkeyup = function(event) {
             let keyInput = event.key.toLowerCase();
             
-            console.log(keyInput);
-            
+            //If keyInput is a letter and has not been guessed already run letter check and push guessedLetter to array. 
             if ( /^[a-z]$/.test(keyInput) == true && guessedLetters.indexOf(keyInput) == -1 ) {
                letterCheck(keyInput);
                guessedLetters.push(keyInput);
