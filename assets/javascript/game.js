@@ -41,7 +41,7 @@ window.onload = function() {
             document.getElementById("loss").textContent = loss;
         }
 
-            
+ 
         function winLoseCheck() {
             if (wordCounter === randWord.length) {
                 wins++;
