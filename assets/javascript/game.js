@@ -76,7 +76,7 @@ window.onload = function() {
             //What happens if guess is wrong 
             else { 
                 dashWrongGuess.push(userKey);
-                dashWrongGuessStr = dashWrongGuess.join(" ");
+                dashWrongGuessStr = (dashWrongGuess.join(" ")).toUpperCase();
                 numberOfGuesses--;
                 document.getElementById("dashWrongGuess").textContent = dashWrongGuessStr;
                 document.getElementById("numberOfGuesses").textContent = numberOfGuesses;
