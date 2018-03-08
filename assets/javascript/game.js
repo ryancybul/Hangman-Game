@@ -1,4 +1,4 @@
-window.onload = function() {
+$( document ).ready(function() {
         
         //Global variables
         let words = ["maggie", "marge", "homer", "barney", "lisa", "bart", "apu", "smithers", "moe", "millhouse", "nelson", "ralph", "krusty"];
@@ -89,7 +89,7 @@ window.onload = function() {
         gameStart();
 
         //Keypress event
-        document.onkeypress = function(event) {
+        document.onkeyup = function(event) {
             let keyInput = event.key.toLowerCase();
             
             //If keyInput is a letter and has not been guessed already run letter check and push guessedLetter to array. 
@@ -98,4 +98,4 @@ window.onload = function() {
                guessedLetters.push(keyInput);
             }
         }
-    }
+    });

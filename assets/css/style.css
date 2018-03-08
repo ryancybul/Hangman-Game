@@ -25,7 +25,7 @@ body {
 }
 
 .instructions {
-    width: 40%;
+    width: 50%;
 }
 
 .rules {
@@ -39,5 +39,5 @@ body {
 }
 
 h1 {
-    font-size: 3rem;
+    font-size: 2rem;
 }
