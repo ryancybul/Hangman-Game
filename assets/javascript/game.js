@@ -1,7 +1,7 @@
 window.onload = function() {
         
         //Global variables
-        let words = ["maggie", "marge", "homer", "barney", "lisa", "bart", "apu", "smithers", "moe", "milhouse", "nelson", "ralph", "krusty"];
+        let words = ["maggie", "marge", "homer", "barney", "lisa", "bart", "apu", "smithers", "moe", "millhouse", "nelson", "ralph", "krusty"];
         let wins = 0;
         let loss = 0;
         let numberOfGuesses = 6;
