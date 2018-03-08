@@ -47,7 +47,7 @@ window.onload = function() {
                 wins++;
                 document.getElementById('win').textContent = wins;
                 document.getElementById('wooHoo').play();
-                alert("You won! The characer is " + randWord.charAt(0).toUpperCase() + randWord.slice(1) + ".");
+                alert("You won! The character is " + randWord.charAt(0).toUpperCase() + randWord.slice(1) + ".");
                 gameStart();
             } 
             else if (numberOfGuesses === 0) {
@@ -89,7 +89,7 @@ window.onload = function() {
         gameStart();
 
         //Keypress event
-        document.onkeyup = function(event) {
+        document.onkeypress = function(event) {
             let keyInput = event.key.toLowerCase();
             
             //If keyInput is a letter and has not been guessed already run letter check and push guessedLetter to array. 
