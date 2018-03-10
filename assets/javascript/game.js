@@ -81,7 +81,6 @@ $( document ).ready(function() {
                 document.getElementById("dashWrongGuess").textContent = dashWrongGuessStr;
                 document.getElementById("numberOfGuesses").textContent = numberOfGuesses;
             }
-            
             winLoseCheck();
         };
 
@@ -89,7 +88,7 @@ $( document ).ready(function() {
         gameStart();
 
         //Keypress event
-        document.onkeyup = function(event) {
+        document.onkeypress = function(event) {
             let keyInput = event.key.toLowerCase();
             
             //If keyInput is a letter and has not been guessed already run letter check and push guessedLetter to array. 
